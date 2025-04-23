@@ -9,13 +9,12 @@ public class RaceTimer : MonoBehaviour
     
     private bool timerRunning = false;
     private float raceTime = 0;
-    [SerializeField] private Leaderboard leaderboard;
 
     private void OnEnable()
     {
-        GameManger.RaceStart += startRace;
-        GameManger.RaceFinish += FinishRace;
-        GameManger.RacePenalty += Penalty;
+        GameEvents.raceStart += startRace;
+        GameEvents.raceEnd += FinishRace;
+        GameEvents.racePenalty += Penalty;
     }
 
     private void Penalty()
@@ -26,15 +25,14 @@ public class RaceTimer : MonoBehaviour
 
     public void OnDisable()
     {
-        GameManger.RaceStart -= startRace;
-        GameManger.RaceFinish -= FinishRace;
-        GameManger.RacePenalty -= Penalty;
+        GameEvents.raceStart -= startRace;
+        GameEvents.raceEnd -= FinishRace;
+        GameEvents.racePenalty -= Penalty;
     }
 
 
     public void startRace()
     {
-        raceTime = 0;
         timerRunning = true;
         Debug.Log("Race Start");
     }
@@ -42,15 +40,7 @@ public class RaceTimer : MonoBehaviour
     public void FinishRace()
     {
         timerRunning = false;
-        leaderboard.AddTime(raceTime);
-        GameData.Instance.racesCompleted++;
-        Debug.Log("Race end" + GameData.Instance.racesCompleted);
+        Debug.Log("Race end");
         Debug.Log("race time: " + raceTime);
-    }
-
-    private void Update()
-    {
-        if (timerRunning)
-            raceTime += Time.deltaTime;
     }
 }

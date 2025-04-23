@@ -8,6 +8,6 @@ public class PenaltyFlag : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
-            GameManger.CallRacePenalty();
+            GameEvents.CallRacePenalty();
     }
 }

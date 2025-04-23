@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FinishGate : MonoBehaviour
+public class FinishGame : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
